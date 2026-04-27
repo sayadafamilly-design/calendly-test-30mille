@@ -2,7 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 
 const db = new sqlite3.Database("./calendar.db");
 
-
+//test
 //creation de la table slots, je n'ai pas fait une version avec plusieurs users pour le test
 db.serialize(() => {
   db.run(`
