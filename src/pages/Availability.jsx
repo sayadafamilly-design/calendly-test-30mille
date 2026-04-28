@@ -7,8 +7,7 @@ export default function Availability() {
   const [end, setEnd] = useState("10:00");
   const [slots, setSlots] = useState([]);
 
-  const loadSlots = async () => {
-    // const res = await axios.get("http://localhost:5000/slots");
+  const loadSlots = async () => { 
     const res = await axios.get("https://calendly-test-30mille.onrender.com/slots");
     
     setSlots(Array.isArray(res.data) ? res.data : []);
