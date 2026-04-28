@@ -21,7 +21,7 @@ export default function Availability() {
   const addSlot = async () => {
     console.log("CLICK OK");
 
-    await axios.post("http://localhost:5000/slots", {
+    await axios.post("http://calendly-test-30mille.onrender.com/slots", {
       date,
       start,
       end

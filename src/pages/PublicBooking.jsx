@@ -37,7 +37,7 @@ export default function PublicBooking() {
   };
 
   const handleBook = async () => {
-    await axios.post("http://localhost:5000/book", {
+    await axios.post("http://calendly-test-30mille.onrender.com/book", {
       id: selectedSlot.id,
       ...form
     });

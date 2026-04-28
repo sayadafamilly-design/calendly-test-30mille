@@ -29,13 +29,13 @@ export default function Dashboard() {
 
   //suppression des creneaux
   const deleteSlot = async (id) => {
-    await axios.delete(`http://localhost:5000/slots/${id}`);
+    await axios.delete(`http://calendly-test-30mille.onrender.com/slots/${id}`);
     loadSlots();
   };
 
   //remet le slot en dispo
   const updateBookedState = async (id) => {
-    await axios.post(`http://localhost:5000/slots/${id}`);
+    await axios.post(`http://calendly-test-30mille.onrender.com/slots/${id}`);
     loadSlots();
   };
   
