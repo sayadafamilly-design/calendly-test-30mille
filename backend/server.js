@@ -1,5 +1,11 @@
 const express = require("express");
-const cors = require("cors");
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'https://front-test-30-mille.onrender.com/', // Remplacez par VOTRE URL frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],    // Autorise explicitement les méthodes
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 const db = require("./db");
 
 const app = express();
