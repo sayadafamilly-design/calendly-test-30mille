@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "http://calendly-test-30mille.onrender.com";
 
 export const getSlots = () => axios.get(`${API}/slots`);
 
