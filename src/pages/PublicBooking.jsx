@@ -15,7 +15,7 @@ export default function PublicBooking() {
   });
 
   const loadSlots = async () => {
-    const res = await axios.get("http://localhost:5000/slots");
+    const res = await axios.get("https://calendly-test-30mille.onrender.com/slots");
 
     const dispo = Array.isArray(res.data)
       ? res.data.filter((s) => s.booked === 0)

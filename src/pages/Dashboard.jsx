@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   // recuperation des horaires
   const loadSlots = async () => {
-    const res = await axios.get("http://localhost:5000/slots");
+    const res = await axios.get("https://calendly-test-30mille.onrender.com/slots");
     setSlots(Array.isArray(res.data) ? res.data : []);
   };
 
