@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Availability() {
   const [date, setDate] = useState("");
@@ -7,9 +8,13 @@ export default function Availability() {
   const [end, setEnd] = useState("10:00");
   const [slots, setSlots] = useState([]);
 
-  const loadSlots = async () => { 
-    const res = await axios.get("https://calendly-test-30mille.onrender.com/slots");
-    
+  const navigate = useNavigate();
+
+  const loadSlots = async () => {
+    const res = await axios.get(
+      "https://calendly-test-30mille.onrender.com/slots"
+    );
+
     setSlots(Array.isArray(res.data) ? res.data : []);
   };
 
@@ -18,13 +23,14 @@ export default function Availability() {
   }, []);
 
   const addSlot = async () => {
-    console.log("CLICK OK");
-
-    await axios.post("https://calendly-test-30mille.onrender.com/slots", {
-      date,
-      start,
-      end
-    });
+    await axios.post(
+      "https://calendly-test-30mille.onrender.com/slots",
+      {
+        date,
+        start,
+        end
+      }
+    );
 
     loadSlots();
   };
@@ -32,7 +38,17 @@ export default function Availability() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
+        <div style={styles.topBar}>
+          <button
+            style={styles.backButton}
+            onClick={() => navigate("/dashboard")}
+          >
+            ← Dashboard
+          </button>
+        </div>
+
         <h1 style={styles.title}>Disponibilités</h1>
+
         <p style={styles.subtitle}>
           Ajoutez vos créneaux disponibles
         </p>
@@ -59,20 +75,28 @@ export default function Availability() {
             style={styles.input}
           />
 
-          <button onClick={addSlot} style={styles.button}>
+          <button
+            onClick={addSlot}
+            style={styles.button}
+          >
             Ajouter
           </button>
         </div>
 
         <div style={styles.list}>
           {slots.length === 0 && (
-            <p style={styles.empty}>Aucun créneau enregistré</p>
+            <p style={styles.empty}>
+              Aucun créneau enregistré
+            </p>
           )}
 
           {slots
             .filter((slot) => slot.booked === 0)
             .map((slot) => (
-              <div key={slot.id} style={styles.slot}>
+              <div
+                key={slot.id}
+                style={styles.slot}
+              >
                 <div style={styles.slotDate}>
                   {slot.date}
                 </div>
@@ -105,6 +129,22 @@ const styles = {
     boxShadow: "0 12px 30px rgba(0,0,0,0.08)"
   },
 
+  topBar: {
+    display: "flex",
+    justifyContent: "flex-end",
+    marginBottom: "10px"
+  },
+
+  backButton: {
+    padding: "10px 14px",
+    border: "none",
+    borderRadius: "10px",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer",
+    fontWeight: "bold"
+  },
+
   title: {
     margin: 0,
     fontSize: "32px"
@@ -118,7 +158,8 @@ const styles = {
 
   form: {
     display: "grid",
-    gridTemplateColumns: "1.3fr 1fr 1fr auto",
+    gridTemplateColumns:
+      "1.3fr 1fr 1fr auto",
     gap: "12px",
     marginBottom: "30px"
   },
@@ -168,14 +209,5 @@ const styles = {
 
   slotHour: {
     color: "#333"
-  },
-
-  badge: {
-    background: "#d1fae5",
-    color: "#065f46",
-    padding: "6px 10px",
-    borderRadius: "999px",
-    fontSize: "13px",
-    fontWeight: "bold"
   }
 };
